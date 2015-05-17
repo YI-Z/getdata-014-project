@@ -67,10 +67,10 @@ data7<- select(data5,-contains("X", ignore.case = F), -contains("Y", ignore.case
 ## organize by X,Y,Z
 data6 <- data6 %>% gather(index, value, -subject, -activity) 
 ## separate into variable name, calculation type, axis
-data6 <- separate(data6, index, into = c("variable", "type", "axis"), sep = "[-]")
+data6 <- separate(data6, index, into = c("feature", "type", "axis"), sep = "[-]")
 
 ## tide the data without axis infomation
-data7 <- data7 %>% gather(index, value, -subject, -activity) %>% separate(index, into = c("variable", "type"), sep = "[-]")
+data7 <- data7 %>% gather(index, value, -subject, -activity) %>% separate(index, into = c("feature", "type"), sep = "[-]")
 ## add additional column of axis to NA
 data7 <- mutate(data7, axis = NA)
 
