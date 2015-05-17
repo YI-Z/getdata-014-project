@@ -59,5 +59,24 @@ names(data3)
 
 data5 <- group_by(data3, subject, activity) %>% summarise_each(funs(mean))
 
+## The following is to tide the data in data5
+## There are two types of data in the data set, separate them by XYZ
+data6<- select(data5, subject, activity, contains("X", ignore.case = F), contains("Y", ignore.case = F),contains("Z", ignore.case = F))
+data7<- select(data5,-contains("X", ignore.case = F), -contains("Y", ignore.case = F), -contains("Z", ignore.case = F))
+
+## organize by X,Y,Z
+data6 <- data6 %>% gather(index, value, -subject, -activity) 
+## separate into variable name, calculation type, axis
+data6 <- separate(data6, index, into = c("variable", "type", "axis"), sep = "[-]")
+
+## tide the data without axis infomation
+data7 <- data7 %>% gather(index, value, -subject, -activity) %>% separate(index, into = c("variable", "type"), sep = "[-]")
+## add additional column of axis to NA
+data7 <- mutate(data7, axis = NA)
+
+## merge these two data set together
+data_out <- rbind(data6, data7)
+
+
 ## write the data set into a txt file
-write.table(data5, "output.txt", row.name=FALSE)
+write.table(data_out, "output.txt", row.name=FALSE)
