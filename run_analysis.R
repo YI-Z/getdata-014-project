@@ -77,6 +77,9 @@ data7 <- mutate(data7, axis = NA)
 ## merge these two data set together
 data_out <- rbind(data6, data7)
 
+## arrange the data for better output
+data_out <- arrange(data_out, subject, activity)
+
 
 ## write the data set into a txt file
 write.table(data_out, "output.txt", row.name=FALSE)

@@ -21,4 +21,6 @@ First the dataset was group by subject and activity. And summarise_each function
 
 For data tidying, since the data set contains two different groups, one with X, Y, Z information, and one without axis information. Thus, original data set was subsetted into two groups. And for each group, all columns except subject and activity were gathered and then separated by “-“ into column c(“feature”, “type”, “axis”). For group without axis information, additional axis column with NAs was added. Then both groups were combined together to obtain the tidy data set.
 
+Finally the data set was arranged based on subject and activity.
+
 6. Write the data set with write.table() function.
